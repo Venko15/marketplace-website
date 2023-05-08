@@ -11,7 +11,7 @@ export class AuthController {
     async login(@Body() b, @Res() res){
         try{
             const tokenJ = await this.authService.validateUser(b['name'], b['password'])
-            res.cookie('tokenJWT', tokenJ,{
+            res.cookie(process.env.COOKIE_NAME, tokenJ,{
                 httpOnly:true,
                 sameSite:'Lax',
                 expires: new Date(new Date().getTime() + 300000)//300k ms = 5min za sq, ne e ot ogromno znachenie za momenta
