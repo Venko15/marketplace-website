@@ -1,23 +1,23 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 
-@Entity({name: "products"})
+@Entity({name: "product_table"})
 export class Product {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
-    @Column()
-    name: string;
+    @Column({nullable:true, type: "varchar", default: "error"})
+    name!:string;
 
-    @Column()
-    description: string;
+    @Column({nullable:false})
+    description!: string;
 
-    @Column({ default: true, type:"float" })
+    @Column({ default: 0.00, type:"float" })
     price: number;
 
-    @Column()
+    @Column({nullable:true})
     poster_id: number;    
     
-    @Column()
+    @Column({nullable:true})
     poster_at: Date;     
 
 }

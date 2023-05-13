@@ -9,11 +9,13 @@ import { AuthModule } from './auth/auth.module';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import * as dotenv from "dotenv";
-
+import { Product } from './typeorm/entities/products.entity';
+import { UsersController } from './users/controllers/users/users.controller';
+import { UsersService } from './users/services/users/users.service';
 dotenv.config({ path:join( __dirname,'..','/src','/.env')});
 
 @Module({
-  imports: [
+  imports: [ 
   TypeOrmModule.forRoot({
     type:  'postgres',
     host: process.env.DATABASE_HOST as string,
@@ -21,10 +23,10 @@ dotenv.config({ path:join( __dirname,'..','/src','/.env')});
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD as string,
     database: process.env.DATABASE_NAME,
-    entities: [User],
+    entities: [User, Product],
     synchronize: true
   }), UsersModule, AuthModule],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService],
+  controllers: [AppController, AuthController, UsersController],
+  providers: [AppService, AuthService, UsersService],
 })
 export class AppModule {}

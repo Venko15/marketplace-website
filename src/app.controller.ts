@@ -17,5 +17,6 @@ export class AppController {
   renderRegister(@Res() res) {
     res.sendFile(join(__dirname,"../src/","public/html", "register.html"))
   }
-  
+
+
 }
