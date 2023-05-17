@@ -45,11 +45,11 @@ export class AuthService {
     const payload = {name: user.name, sub: user.id,  products: user.productids}
     let accToken = await this.jwtService.signAsync(payload,{
       expiresIn: 60*30,
-      secret:"dsjakljdlasjkdlwjiajdl"
+      secret:
     });
     let refrToken = await this.jwtService.signAsync(payload,{
       expiresIn: 60*60*24*15,
-      secret:"dsajklwaiodjail"
+      secret:
     }); 
     
     return {
