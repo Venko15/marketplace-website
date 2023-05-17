@@ -17,8 +17,11 @@ export class User{
   password!: string;
 
   @Column('int', {array:true, nullable:true})
-  productids: number[];
+  productids: number[]=[];
 
+  @Column({nullable:true, type: "varchar", default: "error"})
+  refresh_token!: string;
+  
   async comparePassword(password: string): Promise<boolean> {
     return await bcrypt.compare(password, this.password);
   }

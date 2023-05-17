@@ -2,6 +2,7 @@ import {ExtractJwt, Strategy} from 'passport-jwt'
 import {PassportStrategy} from '@nestjs/passport'
 import {Injectable} from '@nestjs/common'
 import { Request } from 'express'
+import { JwtRtPayload } from 'src/utils/types'
 
 @Injectable()
 export class StrategyJwtRT extends PassportStrategy(Strategy,'refresh-jwt'){
@@ -10,12 +11,12 @@ export class StrategyJwtRT extends PassportStrategy(Strategy,'refresh-jwt'){
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
             secretOrKey: "dsajklwaiodjail",
-            passReqToCallBack : true
+            passReqToCallback : true
         })
     }
 
-    async validate(req: Request, payload:any){
-        const refrToken = req.get('authorization').replace('Bearer', '').trim()
-        return {id: payload.sub, name: payload.name, products: payload.products, refrToken};
+    async validate(req:Request, payload:JwtRtPayload){
+        const token = req?.get("Authorization")?.replace("Bearer","")?.trim()
+        return {...payload, token};
     }
 }

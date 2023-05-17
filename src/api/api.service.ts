@@ -10,6 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 export class ApiService {
 
 
+    
     async getProducts(token){
         const resp = await fetch("/users/getProducts", {
             method: "GET", // *GET, POST, PUT, DELETE, etc.
