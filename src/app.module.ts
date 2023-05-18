@@ -6,8 +6,8 @@ import {join} from 'path'
 import { User } from './typeorm/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
+import { AuthController } from './auth/controllers/auth.controller';
+import { AuthService } from './auth/services/auth.service';
 import * as dotenv from "dotenv";
 import { Product } from './typeorm/entities/products.entity';
 import { UsersController } from './users/controllers/users/users.controller';

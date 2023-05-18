@@ -10,7 +10,7 @@ export class StrategyJwtRT extends PassportStrategy(Strategy,'refresh-jwt'){
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
-            secretOrKey: ,
+            secretOrKey: "dsajklwaiodjail",
             passReqToCallback : true
         })
     }

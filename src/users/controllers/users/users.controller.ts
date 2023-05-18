@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, UseGuards, Param, Req } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { JwtAtAuthGuard } from 'src/auth/jwtAtAuth.guard';
-import { JwtRtAuthGuard } from 'src/auth/jwtRtAuthGuard.guard';
+import { JwtAtAuthGuard } from 'src/auth/guards/jwtAtAuth.guard';
+import { JwtRtAuthGuard } from 'src/auth/guards/jwtRtAuthGuard.guard';
 import { CreateProductDto } from 'src/products/dtos/createProduct.dto';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import { UsersService } from 'src/users/services/users/users.service';
