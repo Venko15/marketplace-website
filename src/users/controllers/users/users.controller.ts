@@ -14,8 +14,7 @@ export class UsersController {
     @UseGuards(AuthGuard('access-jwt'))
     @Get("/getProducts")
     async getProducts(@Req() req){
-        await this.userService.getProducts(req.user.sub)
-        return {code:200};
+        return {code:200, products:await this.userService.getProducts(req.user.sub)};
     }
 
     @UseGuards(AuthGuard('access-jwt'))
@@ -24,7 +23,7 @@ export class UsersController {
         if(createProductDto.ownerId == req.user.sub){
             return {code:401};
         }
-        this.userService.addProduct(req.user.sub,createProductDto);
+        await this.userService.addProduct(req.user.sub,createProductDto);
         return {code:200};
     }
 

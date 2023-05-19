@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import * as sha256 from 'fast-sha256';
+import { TokenConfig } from 'src/configs/auth.config';
 @Injectable()
 export class AuthService {
   constructor( 
@@ -34,7 +35,7 @@ export class AuthService {
       
       return{
         code:200,
-        tokens
+        tokens:tokens
       }
       
     }
@@ -45,11 +46,11 @@ export class AuthService {
     const payload = {name: user.name, sub: user.id,  products: user.productids}
     let accToken = await this.jwtService.signAsync(payload,{
       expiresIn: 60*30,
-      secret:"dsjakljdlasjkdlwjiajdl"
+      secret:TokenConfig.at
     });
     let refrToken = await this.jwtService.signAsync(payload,{
       expiresIn: 60*60*24*15,
-      secret:"dsajklwaiodjail"
+      secret:TokenConfig.rt
     }); 
     
     return {

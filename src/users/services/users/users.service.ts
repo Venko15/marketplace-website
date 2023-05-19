@@ -14,9 +14,8 @@ export class UsersService {
     async getProducts(OwnerId){
 
         const products =  await this.productRepository.findBy({poster_id:OwnerId})
-        const owner = await this.userRepository.findOneBy({id:OwnerId})
-        console.log(owner.productids)
-        console.log(products);
+        
+        return products
         
     }
     async addProduct(ownerId,productDetails: CreateProductParams){
@@ -28,12 +27,9 @@ export class UsersService {
         
         const products = await this.productRepository.findBy({poster_id: ownerId})
 
-        console.log(products);
-        console.log(products[products.length-1].id)
         const id  = products[products.length-1].id
 
         owner.productids.push(id)
-        console.log(owner.productids)
         await this.userRepository.save(owner);
 
     }
