@@ -19,23 +19,45 @@ export class UsersService {
         
     }
     async addProduct(ownerId,productDetails: CreateProductParams){
+        
         productDetails.ownerId = ownerId;
+        
         const owner = await this.userRepository.findOneBy({id: ownerId});
+  
         const newProduct = await this.productRepository.create({...productDetails})
+        newProduct.poster_id = ownerId
+        newProduct.poster_at = new Date()
+
         await this.productRepository.save(newProduct);
         
         
         const products = await this.productRepository.findBy({poster_id: ownerId})
 
         const id  = products[products.length-1].id
-
+        console.log(products)
         owner.productids.push(id)
+
         await this.userRepository.save(owner);
 
     }
-    async deleteProduct(pid){
+    async inArray(arr:number[],pid){
+        for(var i=0; i<arr.length; i++){
+            if(arr[i] == pid){
+                return true;
+            }
+        }
+        return false;
+    }
+    async deleteProduct(uid:number,pid:number){
+
         const product = await this.productRepository.findOneBy({id:pid})
-        await this.productRepository.delete(product)
+        const user = await this.userRepository.findOneBy({id:uid});
+        const temparr = user.productids.filter((value)=> value != pid);
+        user.productids = temparr
+        
+        await this.userRepository.save(user);
+
+        await this.productRepository.delete({id:pid})
         return {code:200}
     
     }

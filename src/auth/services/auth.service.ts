@@ -69,11 +69,12 @@ export class AuthService {
     const salt = await bcrypt.genSalt();
     userDetails.password  = await bcrypt.hash(userDetails.password, salt);
     
-    const newUser = this.userRepository.create({...userDetails});
-    this.userRepository.save(newUser);
+    const newUser = await this.userRepository.create({...userDetails});
+    await this.userRepository.save(newUser);
     const tokens = await this.tokens(newUser);
   
     await this.updateToken(newUser.id, tokens.refresh_token)
+    console.log(tokens);
     return {code:200, tokens};
 
   }

@@ -20,20 +20,19 @@ export class UsersController {
     @UseGuards(AuthGuard('access-jwt'))
     @Post("/addProduct")
     async addProduct(@Body() createProductDto: CreateProductDto, @Req() req){
-        if(createProductDto.ownerId == req.user.sub){
-            return {code:401};
-        }
         await this.userService.addProduct(req.user.sub,createProductDto);
         return {code:200};
     }
 
     @UseGuards(AuthGuard('access-jwt'))
     @Post("/deleteProduct/:id")
-    async deleteProduct(@Param('id') id: string, @Req() req){
-            if(req.user.productids.find({value:id}) == null){
+    async deleteProduct(@Param('id') pid: number, @Req() req){
+
+            if(req.user.products.find(elem => elem == pid) != pid){
                 return {code:401}
             }
-            return await this.userService.deleteProduct(id)
+
+            return await this.userService.deleteProduct(req.user.sub,pid)
 
 
     }

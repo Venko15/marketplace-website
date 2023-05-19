@@ -40,10 +40,7 @@ export class AuthController {
     @Post('/register')
     async register(@Body() createUserDto: CreateUserDto){
 
-        return {
-            code:200, 
-            tokens:(await this.authService.createUser(createUserDto)).tokens.refresh_token
-        };
+        return await this.authService.createUser(createUserDto);
     }
 
     
