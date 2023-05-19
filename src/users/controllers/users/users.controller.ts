@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, UseGuards, Param, Req } from '@nestjs/comm
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAtAuthGuard } from 'src/auth/guards/jwtAtAuth.guard';
 import { JwtRtAuthGuard } from 'src/auth/guards/jwtRtAuthGuard.guard';
-import { CreateProductDto } from 'src/products/dtos/createProduct.dto';
+import { CreateProductDto } from 'src/products/dtos/CreateProduct.dto';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import { UsersService } from 'src/users/services/users/users.service';
 
