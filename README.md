@@ -26,6 +26,17 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+
+
+## Configuration
+make yourself a db to match the entity files
+make yourself config files - for jwt access and refresh tokens and for the db
+
+## Docker
+```bash
+docker-compose up --build
+```
+
 ## Installation
 
 ```bash
